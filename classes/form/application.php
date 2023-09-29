@@ -25,9 +25,8 @@
 
 namespace auth_oidc\form;
 
-use html_writer;
+use auth_oidc\utils;
 use moodleform;
-use tool_brickfield\local\areas\mod_choice\option;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -92,7 +91,7 @@ class application extends moodleform {
         ]);
         $mform->setDefault('clientcertsource', 0);
         $mform->disabledIf('clientcertsource', 'clientauthmethod', 'neq', AUTH_OIDC_AUTH_METHOD_CERTIFICATE);
-        $mform->addElement('static', 'clientcertsource_help', '', get_string('clientcertsource_help', 'auth_oidc'));
+        $mform->addElement('static', 'clientcertsource_help', '', get_string('clientcertsource_help', 'auth_oidc', utils::get_openssl_internal_path()));
 
         // Certificate private key.
         $mform->addElement('textarea', 'clientprivatekey', auth_oidc_config_name_in_form('clientprivatekey'),

@@ -84,7 +84,7 @@ $string['clientcert_help'] = 'When using <b>certificate</b> authentication metho
 $string['clientcertsource'] = 'Certificate source';
 $string['clientcertsource_help'] = 'When using <b>certificate</b> authentication method, this is used to define where to retrieve the certificate from. Notes:
 <ul><li><b>Plain text</b> source require input content of certificate/private key file at subsequent text areas.</li>
-<li><b>File name</b> source require that these files exist at OpenSSL Certificate location. On <b>Windows</b> this is located at openssl program dir, at <b>Unix</b> "/etc/ssl/certs". Consider execute "openssl version -d" at your terminal to discover base path.</li></ul>';
+<li><b>File name</b> source require that these files exist at "{$a}" path.</li></ul>';
 $string['cert_source_text'] = 'Plain text';
 $string['cert_source_path'] = 'File name';
 $string['clientprivatekeyfile'] = 'File name of client certificate private key';

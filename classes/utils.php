@@ -154,7 +154,7 @@ class utils {
      */
     public static function get_certpath() {
         $clientcertfile = get_config('auth_oidc', 'clientcertfile');
-        $certlocation = openssl_get_cert_locations()["default_cert_dir"];
+        $certlocation = self::get_openssl_internal_path();
         $certfile = "$certlocation/$clientcertfile";
 
         if (is_file($certfile) && is_readable($certfile)) {
@@ -171,7 +171,7 @@ class utils {
      */
     public static function get_keypath() {
         $clientprivatekeyfile = get_config('auth_oidc', 'clientprivatekeyfile');
-        $keylocation = openssl_get_cert_locations()["default_cert_dir"];
+        $keylocation = self::get_openssl_internal_path();
         $keyfile = "$keylocation/$clientprivatekeyfile";
 
         if (is_file($keyfile) && is_readable($keyfile)) {
@@ -179,5 +179,15 @@ class utils {
         }
 
         return false;
+    }
+
+    /**
+     * Get openssl default certs dir plus "/azuread"
+     *
+     * @return string base path to put cert files
+     */
+    public static function get_openssl_internal_path() {
+        $certlocation = openssl_get_cert_locations()["default_cert_dir"];
+        return "$certlocation/azuread";
     }
 }
