@@ -146,4 +146,38 @@ class utils {
         $logouturl = new \moodle_url('/auth/oidc/logout.php');
         return $logouturl->out(false);
     }
+
+    /**
+     * Get and check existence of OIDC client certificate path
+     *
+     * @return string|bool cert path if exists otherwise false
+     */
+    public static function get_certpath() {
+        $clientcertfile = get_config('auth_oidc', 'clientcertfile');
+        $certlocation = openssl_get_cert_locations()["default_cert_dir"];
+        $certfile = "$certlocation/$clientcertfile";
+
+        if (is_file($certfile) && is_readable($certfile)) {
+            return "file://$certfile";
+        }
+
+        return false;
+    }
+
+    /**
+     * Get and check existence of OIDC client key path
+     *
+     * @return string|bool key path if exists otherwise false
+     */
+    public static function get_keypath() {
+        $clientprivatekeyfile = get_config('auth_oidc', 'clientprivatekeyfile');
+        $keylocation = openssl_get_cert_locations()["default_cert_dir"];
+        $keyfile = "$keylocation/$clientprivatekeyfile";
+
+        if (is_file($keyfile) && is_readable($keyfile)) {
+            return "file://$keyfile";
+        }
+
+        return false;
+    }
 }
